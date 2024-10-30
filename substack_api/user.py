@@ -62,7 +62,7 @@ def get_user_likes(user_id: int):
     return likes
 
 
-def get_user_notes(user_id: int):
+def get_user_items(user_id: int):
     """
     Get notes and comments posted by a user.
 
@@ -75,3 +75,22 @@ def get_user_notes(user_id: int):
     r = requests.get(endpoint, headers=HEADERS, timeout=30)
     notes = r.json()["items"]
     return notes
+
+def get_user_notes(user_id: int):
+    """
+    Get notes posted by a user.
+
+    Parameters
+    ----------
+    user_id : int
+        The user ID of the Substack user.
+    """
+    endpoint = f"https://substack.com/api/v1/reader/feed/profile/{user_id}"
+    r = requests.get(endpoint, headers=HEADERS, timeout=30)
+    notes = r.json()["items"]
+    # Get notes
+    # filtered_notes = [note["comment"] for note in notes if note["type"] == "comment"]
+
+    # Get note reaction count
+    filtered_notes = [note["comment"]["reaction_count"] for note in notes if note["type"] == "comment"]
+    return filtered_notes
