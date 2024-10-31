@@ -41,3 +41,7 @@ Get post contents (HTML only) from one newsletter post:
 ```
 newsletter.get_post_contents("platformer", "how-a-single-engineer-brought-down", html_only=True)
 ```
+
+## Useful Links
+- Replace with the user ID for the profile you are interested in.
+- https://substack.com/api/v1/reader/feed/profile/11638205
